@@ -42,9 +42,9 @@ class Main:
         login = LoginClass(new_window, lambda: start_gym_app(new_window))
 
     def register(self):
-        new_window = tk.Tk()
-        center_window(300, 200, new_window)
-        register = RegisterClass(new_window)
+        new_window2 = tk.Tk()
+        center_window(300, 200, new_window2)
+        register = RegisterClass(new_window2)
 
 def start_gym_app(root):
     new_window = tk.Tk()
@@ -121,7 +121,7 @@ class GymApp:
 if __name__ == "__main__":
     root = tk.Tk()
     # bgimg = tk.PhotoImage(file="/home/dragos/FlexiFit/background.png")
-    # bgimg = tk.PhotoImage(file='background.jpg')
+    #    bgimg = tk.PhotoImage(file='background.jpg')
     # background_label = tk.Label(root, image=bgimg)
     # background_label.place(x=0, y=0, relwidth=1, relheight=1)
     # background_label.pack()

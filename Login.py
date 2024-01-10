@@ -38,6 +38,7 @@ class LoginClass:
     def login(self):
         username = self.username_var.get()
         password = self.password_var.get()
+        # print("merger")
 
         if username == "user" and password == "user":
             tk.messagebox.showinfo(title="Login Success", message="You have successfully logged in")
