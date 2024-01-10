@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from Register import RegisterClass
+from Login import LoginClass
 
 def center_window(width=300, height=200, window=None):
     # get screen width and height
@@ -12,48 +14,37 @@ def center_window(width=300, height=200, window=None):
     y = (screen_height/2) - (height/2)
     window.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
-class LoginClass:
-    def __init__(self, root, login_success):
+class Main:
+    def __init__(self, root):
         self.root = root
-        self.root.title("Login Page")
-        self.login_success = login_success
-
-        # Variables to store login data
-        self.username_var = tk.StringVar()
-        self.password_var = tk.StringVar()
+        self.root.title("FlexiFit App")
 
         # Create GUI elements
         self.create_widgets()
 
     def create_widgets(self):
-        # Username Entry
-        username_label = ttk.Label(self.root, text="Username:")
-        username_label.pack(pady=10)
-
-        username_entry = ttk.Entry(self.root, textvariable=self.username_var)
-        username_entry.pack(pady=10)
-
-        # Password Entry
-        password_label = ttk.Label(self.root, text="Password:")
-        password_label.pack(pady=10)
-
-        password_entry = ttk.Entry(self.root, textvariable=self.password_var)
-        password_entry.pack(pady=10)
+        custom_font = ("Helvetica", 20, "bold")
+        # Title Label
+        title_label = ttk.Label(self.root, text="Welcome to FlexiFit!", font= custom_font)
+        title_label.pack(side=tk.TOP, pady=50)
 
         # Login Button
         login_button = ttk.Button(self.root, text="Login", command=self.login)
-        login_button.pack(pady=20)
+        login_button.pack(side=tk.TOP, pady=10)
+
+        # Register Button
+        register_button = ttk.Button(self.root, text="Register", command=self.register)
+        register_button.pack(side=tk.TOP, pady=10)
 
     def login(self):
-        username = self.username_var.get()
-        password = self.password_var.get()
+        new_window = tk.Tk()
+        center_window(300, 200, new_window)
+        login = LoginClass(new_window, lambda: start_gym_app(new_window))
 
-        if username == "user" and password == "user":
-            tk.messagebox.showinfo(title="Login Success", message="You have successfully logged in")
-            self.root.destroy()
-            self.login_success()
-        else:
-            tk.messagebox.showerror(title="Login Failed", message="Incorrect username or password")
+    def register(self):
+        new_window = tk.Tk()
+        center_window(300, 200, new_window)
+        register = RegisterClass(new_window)
 
 def start_gym_app(root):
     new_window = tk.Tk()
@@ -129,6 +120,12 @@ class GymApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    center_window(500, 400, root)
-    login = LoginClass(root, lambda: start_gym_app(root))
+    # bgimg = tk.PhotoImage(file="/home/dragos/FlexiFit/background.png")
+    # bgimg = tk.PhotoImage(file='background.jpg')
+    # background_label = tk.Label(root, image=bgimg)
+    # background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    # background_label.pack()
+    main_window = Main(root)
+    center_window(400, 300, root)
+    # login = LoginClass(root, lambda: start_gym_app(root))
     root.mainloop()
